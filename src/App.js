@@ -7,10 +7,11 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const ws = useRef(null);
 
+  const protocol = window.location.protocol;
+
   useEffect(() => {
     // This is just a hack for when the app is actually hosted. Defaults to WSS (WebSocket Secure).
     // We also don't mention a specific port. Otherwise, fallback to WS (WebSocket) on port 8080'
-    console.log(window.location.protocol);
     if (window.location.protocol === 'https') {
       ws.current = new WebSocket(`wss://${window.location.hostname}`);
     } else {
@@ -47,26 +48,31 @@ function App() {
   };
 
   return (
-      <div className="app">
-        <header className="content">
-          <h1>React Websocket All-In-One Server</h1>
-        </header>
+    <div className="app">
+      <header className="content">
+        <h1>React Websocket All-In-One Server</h1>
+      </header>
 
-        <div className="content">
-          From: <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </div>
-
-        <div className="content">
-          Message: <input id="myInput" type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-          <button onClick={sendMessage}>Send</button>
-        </div>
-
-        <div className="content">
-          {messages.map((message, index) => (
-              <p key={index}>{message}</p>
-          ))}
-        </div>
+      <div className="content">
+        From: <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
+
+      <div className="content">
+        Message: <input id="myInput" type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+        <button onClick={sendMessage}>Send</button>
+      </div>
+
+      <div className="content">
+        {messages.map((message, index) => (
+            <p key={index}>{message}</p>
+        ))}
+      </div>
+
+      <div>
+        <h1>Current Protocol:</h1>
+        <p>{protocol}</p>
+      </div>
+    </div>
   );
 }
 
