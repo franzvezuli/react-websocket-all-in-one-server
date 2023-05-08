@@ -45,18 +45,15 @@ function App() {
           <h1>React Websocket All-In-One Server</h1>
         </header>
 
-        <!-- From -->
         <div className="content">
           From: <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
 
-        <!-- Message -->
         <div className="content">
           Message: <input id="myInput" type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
           <button onClick={sendMessage}>Send</button>
         </div>
 
-        <!-- Notifications / Chat -->
         <div className="content">
           {messages.map((message, index) => (
               <p key={index}>{message}</p>
@@ -69,9 +66,9 @@ function App() {
 export default App;
 
 /**
- * Retrieves the current time stamp
+ * Retrieves the current timestamp
  *
- * @returns {string} the current timestamp in the format of HH:mm:ss AM/PM
+ * @returns {string} in the format of HH:mm:ss AM/PM
  */
 function getCurrentTimestamp() {
   let date = new Date();
