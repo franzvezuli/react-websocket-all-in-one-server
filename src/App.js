@@ -8,7 +8,13 @@ function App() {
   const ws = useRef(null);
 
   useEffect(() => {
-    ws.current = new WebSocket(`ws://${window.location.hostname}:8080`);
+    // This is just a hack for when the app is actually hosted. Defaults to WSS (WebSocket Secure).
+    // We also don't mention a specific port. Otherwise, fallback to WS (WebSocket) on port 8080
+    if (window.location.protocol === 'https') {
+      ws.current = new WebSocket(`wss://${window.location.hostname}`);
+    } else {
+      ws.current = new WebSocket(`ws://${window.location.hostname}:8080`);
+    }
 
     ws.current.onopen = () => {
       console.log('WebSocket connected');
